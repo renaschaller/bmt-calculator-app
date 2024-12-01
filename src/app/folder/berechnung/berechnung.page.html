@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Berechnung</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="resetAllInputs()">
+        <ion-icon name="reload-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bündelschnittlänge berechnen</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Dropdown-Menü -->
+      <ion-item>
+        <ion-icon slot="start" name="albums-outline"></ion-icon>
+        <ion-label position="stacked">Bürstenart</ion-label>
+        <ion-select [(ngModel)]="selectedOption" (ionChange)="onOptionChange()" interface="popover" placeholder="Bürste auswählen">
+          <ion-select-option *ngFor="let option of brushTypes" [value]="option.value">
+            {{ option.label }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+          <!-- Dropdown für Winkel (wird angezeigt, wenn option3 ausgewählt wurde) -->
+          <ion-item *ngIf="selectedOption === 'option3'">
+            <ion-icon name="pie-chart-outline" slot="start"></ion-icon>
+            <ion-label position="stacked">Winkel auswählen</ion-label>
+            <ion-select [(ngModel)]="selectedAngle" placeholder="Winkel wählen">
+              <ion-select-option *ngFor="let option of angleOptions" [value]="option.value">
+                {{ option.label }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+      <!-- Eingabefeld für Bürstenlänge -->
+      <ion-item *ngIf="selectedOption === 'option1'">
+        <ion-icon name="arrow-up-outline" slot="start"></ion-icon>
+        <ion-label position="stacked">Gesamthöhe [mm]</ion-label>
+        <ion-input type="number" [(ngModel)]="buerstenlaenge"></ion-input>
+      </ion-item>
+
+      <!-- Eingabefelder für Ring/Spirale -->
+      <ion-item *ngIf="selectedOption === 'option2'">
+        <ion-icon name="radio-button-on-outline" slot="start"></ion-icon>
+        <ion-label position="stacked">Innendurchmesser [mm]</ion-label>
+        <ion-input type="number" [(ngModel)]="innendurchmesser"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="selectedOption === 'option2'">
+        <ion-icon name="disc-outline" slot="start"></ion-icon>
+        <ion-label position="stacked">Außendurchmesser [mm]</ion-label>
+        <ion-input type="number" [(ngModel)]="aussendurchmesser"></ion-input>
+      </ion-item>
+
+
+  
+      <!-- Eingabefelder für Streifenarten (wird angezeigt, wenn der Winkel ausgewählt wurde und option3 aktiv ist) -->
+      <ion-item *ngIf="selectedOption === 'option3' && selectedAngle !== null">
+        <ion-icon name="link-outline" slot="start"></ion-icon>
+        <ion-label position="stacked">Streifenart auswählen</ion-label>
+        <ion-select [(ngModel)]="selectedStreifenart" placeholder="Streifenart">
+          <ion-select-option *ngFor="let streifen of streifenarten" [value]="streifen">
+            {{ streifen.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <!-- Eingabefeld für Gesamthöhe (wird angezeigt, wenn der Winkel ausgewählt wurde und option3 aktiv ist) -->
+      <ion-item *ngIf="selectedOption === 'option3' && selectedAngle !== null && selectedStreifenart !== null ">
+        <ion-icon name="arrow-up-outline" slot="start"></ion-icon>
+        <ion-label position="stacked">Gesamthöhe (mm)</ion-label>
+        <ion-input type="number" [(ngModel)]="gesamthoehe"></ion-input>
+      </ion-item>
+
+          <!-- Auswahl des Winkels für Alu Halteprofil -->
+      <ion-item *ngIf="selectedOption === 'option4'">
+        <ion-icon name="pie-chart-outline" slot="start"></ion-icon>
+        <ion-label position="stacked">Winkel auswählen</ion-label>
+        <ion-select [(ngModel)]="selectedAngle" (ionChange)="updateAvailableAluProfiles()" placeholder="Winkel wählen">
+          <ion-select-option *ngFor="let angle of angleOptions" [value]="angle.value">
+            {{ angle.label }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Auswahl des Halteprofils basierend auf dem Winkel -->
+      <ion-item *ngIf="selectedOption === 'option4' && selectedAngle !== null">
+        <ion-icon name="link-outline" slot="start"></ion-icon>
+        <ion-label position="stacked">Alu Halteprofil auswählen</ion-label>
+        <ion-select [(ngModel)]="selectedAluProfil" placeholder="Aluprofil">
+          <ion-select-option *ngFor="let profil of availableAluProfiles" [value]="profil">
+            {{ profil.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    
+        <!-- Eingabefeld für Gesamthöhe -->
+        <ion-item *ngIf="selectedAluProfil">
+          <ion-icon name="arrow-up-outline" slot="start"></ion-icon>
+          <ion-label position="stacked">Gesamthöhe [mm]</ion-label>
+          <ion-input type="number" [(ngModel)]="gesamthoehe"></ion-input>
+        </ion-item>
+
+      <!-- Berechnen-Button (dynamisch deaktiviert) -->
+      <ion-button color="secondary"
+        expand="block" 
+        (click)="berechnen()" 
+        [disabled]="!isBerechnenButtonEnabled()">
+        Berechnen
+      </ion-button>
+
+      <!-- Berechnetes Ergebnis anzeigen -->
+ <!-- Berechnetes Ergebnis anzeigen, wenn kein Fehler vorliegt -->
+<ion-item *ngIf="berechnungErgebnis !== null && !diameterError">
+  <ion-label>Bündelschnittlänge [mm]:</ion-label>
+  <ion-text style="font-size: 1.0rem; font-weight: bold;">{{ berechnungErgebnis }}</ion-text>
+</ion-item>
+      
+      
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,22 @@
+{
+    "name": "BMT Berechnungsapp",
+    "short_name": "BMT",
+    "description": "Eine Berechnungsapp für Bündelschnittmengen",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#3880ff",
+    "icons": [
+      {
+        "src": "bmtlogo.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "bmtlogo.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  

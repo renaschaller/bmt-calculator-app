@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Informationen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Informationen zur Nutzung der Berechnungs-App</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Abschnitt zur Auswahl der Bürstenart -->
+      <ion-item>
+        <ion-label class="ion-text-wrap">
+          <h2><strong>Bürstenarten</strong></h2>
+          <p>Der Benutzer kann zwischen vier Bürstenarten wählen:</p>
+          <ul>
+            <li><strong>Gerade/Topfbürste</strong> (Option 1)</li>
+            <li><strong>Ring/Spirale</strong> (Option 2)</li>
+            <li><strong>Gerade mit Schenkel</strong> (Option 3)</li>
+            <li><strong>Alu Halteprofil</strong> (Option 4)</li>
+          </ul>
+        </ion-label>
+      </ion-item>
+
+      <!-- Abschnitt zu den Eingabefeldern -->
+      <ion-item>
+        <ion-label class="ion-text-wrap">
+          <h2><strong>Eingabefelder</strong></h2>
+          <p>Je nach Bürstenart müssen unterschiedliche Eingabefelder ausgefüllt werden:</p>
+          <ul>
+            <li><strong>Option 1 (Gerade/Topfbürste)</strong>: Eingabe der Bürstenlänge</li>
+            <li><strong>Option 2 (Ring/Spirale)</strong>: Eingabe von Innen- und Außendurchmesser</li>
+            <li><strong>Option 3 (Gerade mit Schenkel)</strong>: Auswahl des Winkels, Streifenart und Eingabe der Gesamthöhe</li>
+            <li><strong>Option 4 (Alu Halteprofil)</strong>: Auswahl des Alu Halteprofils und Eingabe der Gesamthöhe</li>
+          </ul>
+        </ion-label>
+      </ion-item>
+
+      <!-- Abschnitt zum Berechnen-Button -->
+      <ion-item>
+        <ion-label class="ion-text-wrap">
+          <h2><strong>Berechnen-Button</strong></h2>
+          <p>Der "Berechnen"-Button wird nur aktiviert, wenn alle erforderlichen Eingaben für die jeweilige Bürstenart korrekt ausgefüllt wurden.</p>
+        </ion-label>
+      </ion-item>
+
+      <!-- Abschnitt zu den Berechnungsdetails -->
+      <ion-item>
+        <ion-label class="ion-text-wrap">
+          <h2><strong>Berechnungsdetails</strong></h2>
+          <ul>
+            <li>Die Kalkulation erfolgt schrittweise, basierend auf der gewählten Bürstenart.</li>
+            <li>Das Ergebnis wird auf die nächstegroße ganze Zahl aufgerundet.</li>
+            <li>Es gibt eine <strong>Mindestbündelschnittlänge von 50 mm</strong>, falls die Höhe kleiner als 20 mm ist.</li>
+            <li>Für SSV6 ist die Mindesthöhe für den Faserzuschnitt <strong>70mm</strong> und für SSV10 ist sie <strong>80mm</strong>.</li>
+            <li>Bei einem Winkel von <strong>90 Grad</strong> wird die Schenkelhöhe auf 0 gesetzt, da sie geometrisch irrelevant wird. Die Faserhöhe wird dann durch die Gesamthöhe definiert.</li>
+            <li>Die <strong>Abverschnittlänge</strong> ist eine Konstante von 10 mm, die zur endgültigen Bündelschnittlänge hinzugefügt wird, um Verluste bei der Herstellung zu berücksichtigen.</li>
+          </ul>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+
