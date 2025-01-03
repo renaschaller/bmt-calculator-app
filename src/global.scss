@@ -58,8 +58,17 @@ body {
   }
   
   ion-toolbar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    text-align: center;
     --background: var(--ion-color-primary); /* Toolbar-Farbe */
     --color: var(--ion-color-light); /* Textfarbe */
+    --padding-top: env(safe-area-inset-top, 0px); /* Für Geräte mit Notch */
+    --padding-start: env(safe-area-inset-left, 0px);
+    --padding-end: env(safe-area-inset-right, 0px);
+    height: 56px; /* Standardhöhe */
+    z-index: 10;
   }
   ion-item {
     display: flex;
@@ -72,5 +81,15 @@ body {
     color: var(--ion-color-primary); /* Farbe der Icons (optional) */
     align-self: center; /* Sorgt für vertikale Zentrierung */
   }
+  .reload-button ion-icon {
+    color: white; /* Reload-Icon */
+    font-size: 24px; 
+  }
   
+  ion-menu-button {
+    color: white;
+    font-size: 24px;
+    display: block;
+    z-index: 10; 
+  }
   
