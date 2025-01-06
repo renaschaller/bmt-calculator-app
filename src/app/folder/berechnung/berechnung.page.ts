@@ -140,6 +140,53 @@ async showDiameterErrorAlert() {
   await alert.present();
 }
 
+// Funktion zur Berechnung der Toleranz basierend auf der Gesamthöhe
+calculateTolerance(gesamthoehe: number | null): string {
+  if (gesamthoehe === null) {
+    return "Keine Toleranz verfügbar";
+  }
+  if (gesamthoehe > 30 && gesamthoehe <= 120) {
+    return "± 0,80 mm";
+  } else if (gesamthoehe > 120 && gesamthoehe <= 400) {
+    return "± 1,20 mm";
+  } else if (gesamthoehe > 400 && gesamthoehe <= 1000) {
+    return "± 2,00 mm";
+  } else if (gesamthoehe > 1000 && gesamthoehe <= 2000) {
+    return "± 3,00 mm";
+  } else if (gesamthoehe > 2000 && gesamthoehe <= 4000) {
+    return "± 4,00 mm";
+  } else {
+    return "Keine Toleranz für diese Gesamthöhe";
+  }
+}
+// Funktion zur Berechnung der Außentoleranz basierend auf dem Außenmaß
+calculateOuterTolerance(aussenmass: number): number {
+  if (aussenmass <= 40) {
+    return 0.20;
+  } else if (aussenmass <= 50) {
+    return 0.40;
+  } else if (aussenmass <= 75) {
+    return 0.60;
+  } else if (aussenmass <= 150) {
+    return 0.80;
+  } else if (aussenmass <= 200) {
+    return 1.00;
+  } else if (aussenmass <= 300) {
+    return 1.50;
+  } else if (aussenmass <= 500) {
+    return 2.00;
+  } else {
+    return 5.00;
+  }
+}
+
+
+calculateInnerTolerance(aussenmass: number): string {
+  const outerTolerance = this.calculateOuterTolerance(aussenmass);
+  const innerTolerance = outerTolerance * 2; // Innentoleranz ist das Doppelte der Außentoleranz
+  return `± ${innerTolerance.toFixed(2)} mm`;
+}
+
 
   // Berechnungsmethode
   berechnen(): void {
@@ -155,9 +202,22 @@ async showDiameterErrorAlert() {
 
     if (this.selectedOption === 'option1') {
       this.berechnungErgebnis = this.calculateBundleLength(this.buerstenlaenge);
+      const tolerance = this.calculateTolerance(this.buerstenlaenge);
+      console.log(`Gesamthöhen-Toleranz: ${tolerance}`);
     } else if (this.selectedOption === 'option2') {
       const gesamthoehe = this.calculateGesamthoehe();
       this.berechnungErgebnis = this.calculateBundleLength(gesamthoehe);
+       // Außentoleranz und Innentoleranz berechnen, nur wenn aussendurchmesser nicht null ist
+          if (this.aussendurchmesser !== null) {
+            const outerTolerance = this.calculateOuterTolerance(this.aussendurchmesser);
+            const innerTolerance = this.calculateInnerTolerance(this.aussendurchmesser);
+            const outTolerance = `± ${outerTolerance.toFixed(2)} mm`;
+
+            console.log(`Außentoleranz: ${outTolerance}`);
+            console.log(`Innentoleranz: ${innerTolerance}`);
+          } else {
+            console.error('Fehler: Außendurchmesser ist null.');
+          }
     } else if (this.selectedOption === 'option3' && this.selectedStreifenart && this.gesamthoehe !== null) {
       let { schenkelhoehe, koerperhoehe } = this.selectedStreifenart;
       let faserhoehe = this.gesamthoehe - schenkelhoehe + koerperhoehe;
