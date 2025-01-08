@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Berechnung', url: '/folder/berechnung', icon: 'calculator' },
+    { title: 'Bündelschnittlänge', url: '/folder/berechnung', icon: 'calculator' },
+    { title: 'Toleranzberechnung', url: '/folder/toleranzen', icon: 'checkbox-outline' },
     { title: 'Informationen', url: '/folder/informationen', icon: 'information-circle' },
-    //{ title: 'Kontaktdaten', url: '/folder/kontaktdaten', icon: 'person' },
   ];
 }
 

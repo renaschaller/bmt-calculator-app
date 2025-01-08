@@ -13,8 +13,8 @@ const routes: Routes = [
     loadChildren: () => import('./informationen/informationen.module').then( m => m.InformationenPageModule)
   },
   {
-    path: 'kontaktdaten',
-    loadChildren: () => import('./kontaktdaten/kontaktdaten.module').then( m => m.KontaktdatenPageModule)
+    path: 'toleranzen',
+    loadChildren: () => import('./toleranzen/toleranzen.module').then( m => m.ToleranzenPageModule)
   }
 ];
 

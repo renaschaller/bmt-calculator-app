@@ -122,22 +122,6 @@
         <ion-label>Bündelschnittlänge [mm]:</ion-label>
         <ion-text style="font-size: 1.0rem; font-weight: bold;">{{ berechnungErgebnis }}</ion-text>
       </ion-item>
-            <!-- Toleranzen anzeigen -->
-      <ion-item *ngIf="berechnungErgebnis !== null && !diameterError">
-        <ion-label>Toleranz:</ion-label>
-        <ion-text style="font-size: 0.9rem;">
-         <!-- Dynamische Anzeige der Toleranzen -->
-          <ng-container *ngIf="selectedOption === 'option2' && aussendurchmesser !== null">
-              Außen: ± {{ calculateOuterTolerance(aussendurchmesser!) }} mm<br />
-            <ng-container *ngIf="aussendurchmesser !== null">
-              Innen: {{ calculateInnerTolerance(aussendurchmesser!) }}
-            </ng-container>
-          </ng-container>
-          <ng-container *ngIf="selectedOption === 'option1' && buerstenlaenge !== null">
-            {{ calculateTolerance(buerstenlaenge!) }}
-          </ng-container>
-        </ion-text>
-      </ion-item>
       
     </ion-card-content>
   </ion-card>

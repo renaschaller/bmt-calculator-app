@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { KontaktdatenPageRoutingModule } from './kontaktdaten-routing.module';
+import { ToleranzenPageRoutingModule } from './toleranzen-routing.module';
 
-import { KontaktdatenPage } from './kontaktdaten.page';
+import { ToleranzenPage } from './toleranzen.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    KontaktdatenPageRoutingModule
+    ToleranzenPageRoutingModule
   ],
-  declarations: [KontaktdatenPage]
+  declarations: [ToleranzenPage]
 })
-export class KontaktdatenPageModule {}
+export class ToleranzenPageModule {}

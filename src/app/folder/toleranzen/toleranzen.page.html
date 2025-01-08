@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main" ></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Toleranzen</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="reload-button" fill="clear" (click)="resetAllInputs()">
+        <ion-icon name="reload-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Toleranzen berechnen</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Dropdown-Menü für Bürstenart -->
+      <ion-item>
+        <ion-icon slot="start" name="albums-outline"></ion-icon>
+        <ion-label position="stacked">Bürstenart</ion-label>
+        <ion-select [(ngModel)]="selectedOption" (ionChange)="onOptionChange()" interface="popover" placeholder="Bürste auswählen">
+          <ion-select-option *ngFor="let option of brushTypes" [value]="option.value">
+            {{ option.label }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+         <!-- Dropdown für Typ-Auswahl -->
+         <ion-item *ngIf="selectedOption !== null">
+          <ion-icon name="build-outline" slot="start"></ion-icon>
+          <ion-label position="stacked">Bürstentyp auswählen</ion-label>
+          <ion-select [(ngModel)]="selectedType" placeholder="Bürstentyp wählen">
+            <ion-select-option *ngFor="let option of typeOptions" [value]="option.type">
+              {{ option.type }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+          <!-- Eingabefeld für Bürstenlänge -->
+          <ion-item *ngIf="selectedType !== null && selectedOption === 'option1' ">
+            <ion-icon name="arrow-up-outline" slot="start"></ion-icon>
+            <ion-label position="stacked">Gesamtlänge [mm]</ion-label>
+            <ion-input type="number" [(ngModel)]="buerstenlaenge"></ion-input>
+          </ion-item>
+
+                <!-- Eingabefelder für Ring/Spirale -->
+          <ion-item *ngIf="selectedType !== null && selectedOption === 'option2'">
+            <ion-icon name="disc-outline" slot="start"></ion-icon>
+            <ion-label position="stacked">Außendurchmesser [mm]</ion-label>
+            <ion-input type="number" [(ngModel)]="aussendurchmesser"></ion-input>
+          </ion-item>
+
+              <ion-button color="secondary" 
+              expand="block" 
+              (click)="calculateTolerances()" 
+              [disabled]="!isBerechnenButtonEnabled()">
+                Berechnen
+              </ion-button>
+          
+            <!-- Für Option 1: Breiten-, Höhen- und Körperlängentoleranz -->
+            <ion-item *ngIf="tolerancesCalculated && selectedOption === 'option1'" lines="full">
+              <ion-label class="result-label">Breitentoleranz:</ion-label>
+              <ion-text class="result-value">{{ widthTolerance }}</ion-text>
+            </ion-item>
+            <ion-item *ngIf="tolerancesCalculated && selectedOption === 'option1'" lines="full">
+              <ion-label class="result-label">Höhentoleranz:</ion-label>
+              <ion-text class="result-value">{{ heightTolerance }}</ion-text>
+            </ion-item>
+            <ion-item *ngIf="tolerancesCalculated && selectedOption === 'option1'" lines="full">
+              <ion-label class="result-label">Körperlängentoleranz:</ion-label>
+              <ion-text class="result-value">{{ lengthTolerance }}</ion-text>
+            </ion-item>
+
+            <!-- Für Option 2: Außen- und Innentoleranz -->
+          <ion-item *ngIf="tolerancesCalculated && selectedOption === 'option2'" lines="full">
+            <ion-label class="result-label">Breitentoleranz:</ion-label>
+            <ion-text class="result-value">{{ widthTolerance }}</ion-text>
+          </ion-item>
+          <ion-item *ngIf="tolerancesCalculated && selectedOption === 'option2'" lines="full">
+            <ion-label class="result-label">Höhentoleranz:</ion-label>
+            <ion-text class="result-value">{{ heightTolerance }}</ion-text>
+          </ion-item>
+            <ion-item *ngIf="tolerancesCalculated && selectedOption === 'option2'" lines="full">
+              <ion-label class="result-label">Außentoleranz:</ion-label>
+              <ion-text class="result-value">{{ outerTolerance }}</ion-text>
+            </ion-item>
+            <ion-item *ngIf="tolerancesCalculated && selectedOption === 'option2'" lines="full">
+              <ion-label class="result-label">Innentoleranz:</ion-label>
+              <ion-text class="result-value">{{ innerTolerance }}</ion-text>
+            </ion-item>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-content>
+          

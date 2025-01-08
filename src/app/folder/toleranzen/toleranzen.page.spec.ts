@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { KontaktdatenPage } from './kontaktdaten.page';
+import { ToleranzenPage } from './toleranzen.page';
 
-describe('KontaktdatenPage', () => {
-  let component: KontaktdatenPage;
-  let fixture: ComponentFixture<KontaktdatenPage>;
+describe('ToleranzenPage', () => {
+  let component: ToleranzenPage;
+  let fixture: ComponentFixture<ToleranzenPage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KontaktdatenPage);
+    fixture = TestBed.createComponent(ToleranzenPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

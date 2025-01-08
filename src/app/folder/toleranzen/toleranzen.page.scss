@@ -1,0 +1,37 @@
+.custom-gray-button {
+    --background: #d3d3d3; /* Helles Grau als Hintergrundfarbe */
+    --color: #000000;      /* Schwarze Schrift */
+    --border-radius: 4px;  /* Etwas abgerundete Ecken für eine schönere Optik */
+    font-size: 0.9rem;     /* Kleinere Schrift, um den Button dezenter zu machen */
+    padding: 8px 16px;     /* Kleinere Polsterung für eine weniger auffällige Größe */
+  }
+  ion-footer {
+    background-color: #ffffff; /* Weißer Hintergrund */
+    border-top: 1px solid #dcdcdc; /* Optional: eine dezente Trennlinie */
+  }
+  ion-content {
+    --background: #ffffff; /* Weißer Hintergrund */
+  }
+  ion-item {
+    --border-color: #dcdcdc; /* Graue Trennlinie */
+    --inner-padding: 8px; /* Innenabstand */
+    font-size: 1rem;
+  }
+  
+  .result-label {
+    font-weight: normal; /* Normale Schrift für die Label */
+    color: #000000; /* Dezente Schriftfarbe */
+  }
+  
+  .result-value {
+    font-weight: bold; /* Fett für die Ergebnisse */
+    color: #000; /* Klare, dunkle Farbe */
+    text-align: end; /* Rechtsbündig */
+    width: 80px; /* Fester Platz für das Ergebnis */
+    display: flex;
+    justify-content: flex-end; /* Rechtsbündige Ausrichtung */
+  }
+  
+
+  
+  
