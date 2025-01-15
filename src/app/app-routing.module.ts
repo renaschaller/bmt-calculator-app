@@ -6,7 +6,7 @@ import { BerechnungPage } from './folder/berechnung/berechnung.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/folder/berechnung',
+    redirectTo: 'folder/login',
     pathMatch: 'full',
   },
 
@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'folder/toleranzen',
     loadChildren: () => import('./folder/toleranzen/toleranzen.module').then( m => m.ToleranzenPageModule)
+  },
+  {
+    path: 'folder/login',
+    loadChildren: () => import('./folder/login/login.module').then( m => m.LoginPageModule)
   },
 
   
