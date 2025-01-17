@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'folder/login',
     loadChildren: () => import('./folder/login/login.module').then( m => m.LoginPageModule)
   },
+  {
+    path: 'folder/zeiterfassung',
+    loadChildren: () => import('./folder/zeiterfassung/zeiterfassung.module').then( m => m.ZeiterfassungPageModule)
+  },
 
   
 ];

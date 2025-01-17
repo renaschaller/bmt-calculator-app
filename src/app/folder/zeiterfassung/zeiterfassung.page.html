@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main" ></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Zeiterfassung</ion-title>  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bitte scannen Sie den QR-Code des Auftrages</ion-card-title>
+    </ion-card-header>
+      <ion-button color="secondary" expand="full" (click)="scanQRCode()">QR-Code scannen</ion-button>
+  </ion-card>
+   <!-- Anzeige des Ergebnisses nach dem Scannen -->
+   <div *ngIf="scannedResult">
+    <h2>Scan-Ergebnis</h2>
+    <div class="scan-result-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Fertigungsauftrags-ID</th>
+            <th>Arbeitsgang-ID</th>
+            <th>Arbeitsgang-Beschreibung</th>
+            <th>Zeitstempel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ faId }}</td>
+            <td>{{ arbeitsgangId }}</td>
+            <td>{{ arbeitsgangText }}</td>
+            <td>{{ scanTimestamp }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ion-content>
+

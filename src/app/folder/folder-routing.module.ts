@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'toleranzen',
     loadChildren: () => import('./toleranzen/toleranzen.module').then( m => m.ToleranzenPageModule)
+  },
+  {
+    path: 'zeiterfassung',
+    loadChildren: () => import('./zeiterfassung/zeiterfassung.module').then( m => m.ZeiterfassungPageModule)
   }
 ];
 
